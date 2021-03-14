@@ -49,7 +49,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    // marginTop: 8,
     borderRadius: 50,
     width: '100%',
     paddingHorizontal: 10,

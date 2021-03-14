@@ -1,16 +1,14 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useEffect, useState} from 'react';
+import React,  from 'react';
 import {
   View,
   Text,
-  ImageBackground,
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
 import {H_W} from '../SsComp/SsDim';
 import WrapperScreen from '../SsComp/WrapperScreen';
 import {connect} from 'react-redux';
-import Data from '../SSData';
 import {colors} from '../SsComp/SsColor';
 import NavigationRef from '../SsComp/RefNavigation';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -18,7 +16,6 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import SsSearchBar from '../SsComp/SsSearchBar';
 import {Button, Avatar} from 'react-native-elements';
 import Entypo from 'react-native-vector-icons/Entypo';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {
   SsremoveFavAction,
   SssetFavAction,
@@ -27,30 +24,10 @@ import {
 } from '../SsRedux/SsActions';
 
 function SingleProduct(props) {
-  useEffect(() => {
-    // fetchFlavours();
-  }, []);
+ 
   const insets = useSafeAreaInsets();
   const HEIGHT = H_W.height - (insets.bottom + insets.top);
-  const [flavours, setFlavours] = useState([]);
-  const [CurrFlavours, setCurrFlavours] = useState({});
   const SsProduct = props.SsProduct;
-
-  // const fetchFlavours = () => {
-  //   let fc = 0;
-  //   let fl = [];
-  //   for (let ce = 0; ce < Data.topping.length; ce++) {
-  //     if (Data.topping[ce].productid === SsProduct.id) {
-  //       fl.push(Data.topping[ce]);
-  //       if (fc === 3) {
-  //         break;
-  //       }
-  //       fc++;
-  //     }
-  //   }
-  //   setCurrFlavours(fl[0]);
-  //   setFlavours(fl);
-  // };
 
   const SsAddToCart = () => {
     props.SsaddCartAction({...SsProduct});
@@ -102,8 +79,8 @@ function SingleProduct(props) {
             <SsSearchBar editable={false} />
           </TouchableOpacity>
         </View>
-        <View style={{...border, justifyContent: 'space-between'}}>
-          <View style={{...border}}>
+        <View style={{justifyContent: 'space-between'}}>
+          <View>
             <Avatar
               rounded
               size={H_W.width * 0.75}
@@ -112,12 +89,18 @@ function SingleProduct(props) {
                 backgroundColor: colors.secondary,
                 elevation: 24,
                 marginLeft: H_W.width * 0.04,
+                shadowColor: '#000',
+                shadowOffset: {
+                  width: 0,
+                  height: 12,
+                },
+                shadowOpacity: 0.58,
+                shadowRadius: 16.0,
               }}
             />
           </View>
           <Text
             style={{
-              ...border,
               fontWeight: 'bold',
               width: H_W.width * 0.8,
               color: colors.primary,
@@ -128,8 +111,6 @@ function SingleProduct(props) {
           </Text>
           <Text
             style={{
-              ...border,
-              // width: H_W.width * 0.85,
               color: `rgba(${colors.rgb_Primary}, 0.6)`,
               fontSize: 14,
               fontWeight: 'bold',
@@ -139,7 +120,6 @@ function SingleProduct(props) {
           </Text>
           <View
             style={{
-              ...border,
               flexDirection: 'row',
               alignItems: 'center',
               justifyContent: 'space-between',
@@ -204,10 +184,7 @@ function SingleProduct(props) {
     </WrapperScreen>
   );
 }
-const border = {
-  // borderWidth: 1,
-  // borderColor: 'red',
-};
+
 const styles = StyleSheet.create({
   singleProduct_CE23: {},
   singleProduct_CE20: {},

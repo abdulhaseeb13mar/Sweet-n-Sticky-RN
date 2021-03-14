@@ -24,6 +24,8 @@ const ItemCounterWrapper = ({style, position, Counterlength, ...props}) => {
           SsaddCart={(i) => props.SsaddCartAction(i)}
           SsremoveCart={(i) => props.SsremoveCartAction(i)}
           Counterlength={Counterlength}
+          counterColor={props.counterColor}
+          counterContentColor={props.counterContentColor}
         />
       )}
       {props.children}
@@ -35,6 +37,8 @@ const ItemCounterWrapper = ({style, position, Counterlength, ...props}) => {
           SsaddCart={(i) => props.SsaddCartAction(i)}
           SsremoveCart={(i) => props.SsremoveCartAction(i)}
           Counterlength={Counterlength}
+          counterColor={props.counterColor}
+          counterContentColor={props.counterContentColor}
         />
       )}
     </View>
@@ -47,6 +51,8 @@ const DefaultCounter = ({
   SsaddCart,
   position,
   Counterlength,
+  counterColor,
+  counterContentColor,
 }) => {
   const insets = useSafeAreaInsets();
   const HEIGHT = H_W.height - (insets.bottom + insets.top);
@@ -55,6 +61,7 @@ const DefaultCounter = ({
       style={{
         ...styles.itemCounter_CE2,
         paddingVertical: HEIGHT * 0.003,
+        backgroundColor: counterColor ? counterColor : 'white',
       }}>
       <View
         style={{
@@ -70,12 +77,22 @@ const DefaultCounter = ({
           <Feather
             name="minus-circle"
             size={H_W.width * 0.05}
-            color={'black'}
+            color={counterContentColor ? counterContentColor : 'black'}
           />
         </TouchableOpacity>
-        <Text style={{fontWeight: 'bold', color: 'black'}}>{item.added}</Text>
+        <Text
+          style={{
+            fontWeight: 'bold',
+            color: counterContentColor ? counterContentColor : 'black',
+          }}>
+          {item.added}
+        </Text>
         <TouchableOpacity onPress={() => SsaddCart(item)}>
-          <Feather name="plus-circle" size={H_W.width * 0.05} color={'black'} />
+          <Feather
+            name="plus-circle"
+            size={H_W.width * 0.05}
+            color={counterContentColor ? counterContentColor : 'black'}
+          />
         </TouchableOpacity>
       </View>
     </View>
@@ -88,7 +105,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   itemCounter_CE2: {
-    backgroundColor: 'white',
     borderRadius: 15,
     elevation: 3,
     paddingHorizontal: H_W.width * 0.03,

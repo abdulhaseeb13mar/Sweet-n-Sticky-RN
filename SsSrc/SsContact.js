@@ -10,6 +10,7 @@ import {colors} from '../SsComp/SsColor';
 import {Button, Overlay} from 'react-native-elements';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Feather from 'react-native-vector-icons/Feather';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {isFormValid} from '../SsComp/validation';
 import NavPointer from '../SsComp/RefNavigation';
 import {SsUserAction, SsresetCart} from '../SsRedux/SsActions';
@@ -26,21 +27,13 @@ const ConfirmOrder = (props) => {
   const [address, setAddress] = useState('');
   const [firstName, setFirstName] = useState('');
   const [emailErrMsg, setEmailErrMsg] = useState('');
-  const [lastNameErrMsg, setLastNameErrMsg] = useState('');
-  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [phoneErrMsg, setPhoneErrMsg] = useState('');
   const [addressErrMsg, setAddressErrMsg] = useState('');
   const [phone, setPhone] = useState('');
 
   const Confirm = () => {
-    const formValidResponse = isFormValid(
-      firstName,
-      lastName,
-      email,
-      phone,
-      address,
-    );
+    const formValidResponse = isFormValid(firstName, email, phone, address);
     if (!formValidResponse.status) {
       errorMsgHandler(formValidResponse.errCategory, formValidResponse.errMsg);
     } else {
@@ -50,7 +43,6 @@ const ConfirmOrder = (props) => {
         firstName: firstName,
         phone: phone,
         address: address,
-        lastName: lastName,
       });
     }
   };
@@ -78,15 +70,16 @@ const ConfirmOrder = (props) => {
             firstname: firstName,
             address: address,
             phonenumber: phone,
-            lastname: lastName,
             email: email,
-            appname: 'Creamery Express',
+            appname: 'SweetnSticky',
           }),
         },
       );
       const response = await res.json();
       setLoading(false);
-      response.status ? setShowModal(true) : ShowToast('Some error occurred');
+      response.status
+        ? NavPointer.Push('SsConfirmOrder')
+        : ShowToast('Some error occurred');
     } catch (error) {
       console.log(error);
     }
@@ -95,31 +88,21 @@ const ConfirmOrder = (props) => {
   const errorMsgHandler = (errCategory, errMsg) => {
     if (errCategory === 'email') {
       setEmailErrMsg(errMsg);
-      setLastNameErrMsg('');
       setPhoneErrMsg('');
       setFirstNameErrMsg('');
       setAddressErrMsg('');
     } else if (errCategory === 'firstname') {
-      setLastNameErrMsg('');
       setEmailErrMsg('');
       setFirstNameErrMsg(errMsg);
       setPhoneErrMsg('');
       setAddressErrMsg('');
-    } else if (errCategory === 'lastname') {
-      setLastNameErrMsg(errMsg);
-      setEmailErrMsg('');
-      setPhoneErrMsg('');
-      setFirstNameErrMsg('');
-      setAddressErrMsg('');
     } else if (errCategory === 'phone') {
       setPhoneErrMsg(errMsg);
       setEmailErrMsg('');
-      setLastNameErrMsg('');
       setFirstNameErrMsg('');
       setAddressErrMsg('');
     } else if (errCategory === 'address') {
       setAddressErrMsg(errMsg);
-      setLastNameErrMsg('');
       setPhoneErrMsg('');
       setFirstNameErrMsg('');
       setEmailErrMsg('');
@@ -134,7 +117,6 @@ const ConfirmOrder = (props) => {
 
   const changePhone = (t) => setPhone(t);
   const changeAddress = (t) => setAddress(t);
-  const changeLastName = (t) => setLastName(t);
   const changeEmail = (t) => setEmail(t);
   const goBack = () => NavPointer.GoBack();
   const changeFirstName = (t) => setFirstName(t);
@@ -171,43 +153,20 @@ const ConfirmOrder = (props) => {
           </View>
         </View>
         <View style={styles.SsPersonalInfoWrapper}>
-          <Text style={styles.SsPersonalInfoHeader}>Personal Information</Text>
-        </View>
-        <View style={styles.SsPersonalInfoWrapper}>
           <View style={styles.SsSinglePersonalInfoWrapper}>
             <Text
               style={{
                 ...styles.SsPersonalInfoHeadingName,
                 color: firstNameErrMsg ? 'red' : 'black',
               }}>
-              FIRST NAME <Text> {firstNameErrMsg}</Text>
+              YOUR NAME <Text> {firstNameErrMsg}</Text>
             </Text>
             <View style={styles.SsPersonalInfoInputWrapper}>
               <TextInput
-                placeholder="First Name"
+                placeholder="Your Name"
                 style={{...styles.Input, height: HEIGHT * 0.065}}
                 onChangeText={changeFirstName}
-              />
-              <Feather
-                name="user"
-                size={H_W.width * 0.07}
-                style={styles.SsInputIcon}
-              />
-            </View>
-          </View>
-          <View style={styles.SsSinglePersonalInfoWrapper}>
-            <Text
-              style={{
-                ...styles.SsPersonalInfoHeadingName,
-                color: lastNameErrMsg ? 'red' : 'black',
-              }}>
-              LAST NAME <Text> {lastNameErrMsg}</Text>
-            </Text>
-            <View style={styles.SsPersonalInfoInputWrapper}>
-              <TextInput
-                placeholder="Last Name"
-                style={{...styles.Input, height: HEIGHT * 0.065}}
-                onChangeText={changeLastName}
+                placeholderTextColor={colors.lightGrey3}
               />
               <Feather
                 name="user"
@@ -222,16 +181,17 @@ const ConfirmOrder = (props) => {
                 ...styles.SsPersonalInfoHeadingName,
                 color: emailErrMsg ? 'red' : 'black',
               }}>
-              EMAIL<Text> {emailErrMsg}</Text>
+              YOUR EMAIL<Text> {emailErrMsg}</Text>
             </Text>
             <View style={styles.SsPersonalInfoInputWrapper}>
               <TextInput
                 placeholder="Email"
                 style={{...styles.Input, height: HEIGHT * 0.065}}
                 onChangeText={changeEmail}
+                placeholderTextColor={colors.lightGrey3}
               />
-              <Feather
-                name="mail"
+              <FontAwesome5
+                name="envelope"
                 size={H_W.width * 0.07}
                 style={styles.SsInputIcon}
               />
@@ -243,7 +203,7 @@ const ConfirmOrder = (props) => {
                 ...styles.SsPersonalInfoHeadingName,
                 color: phoneErrMsg ? 'red' : 'black',
               }}>
-              PHONE<Text> {phoneErrMsg}</Text>
+              YOUR PHONE NUMBER<Text> {phoneErrMsg}</Text>
             </Text>
             <View style={styles.SsPersonalInfoInputWrapper}>
               <TextInput
@@ -251,8 +211,9 @@ const ConfirmOrder = (props) => {
                 keyboardType="number-pad"
                 style={{...styles.Input, height: HEIGHT * 0.065}}
                 onChangeText={changePhone}
+                placeholderTextColor={colors.lightGrey3}
               />
-              <Feather
+              <FontAwesome5
                 name="phone"
                 size={H_W.width * 0.07}
                 style={styles.SsInputIcon}
@@ -265,16 +226,17 @@ const ConfirmOrder = (props) => {
                 ...styles.SsPersonalInfoHeadingName,
                 color: addressErrMsg ? 'red' : 'black',
               }}>
-              ADDRESS<Text> {addressErrMsg}</Text>
+              DELIVERY ADDRESS<Text> {addressErrMsg}</Text>
             </Text>
             <View style={styles.SsPersonalInfoInputWrapper}>
               <TextInput
                 placeholder="Address"
                 style={{...styles.Input, height: HEIGHT * 0.065}}
                 onChangeText={changeAddress}
+                placeholderTextColor={colors.lightGrey3}
               />
-              <Feather
-                name="map-pin"
+              <FontAwesome5
+                name="map-marker-alt"
                 size={H_W.width * 0.07}
                 style={styles.SsInputIcon}
               />
@@ -294,7 +256,7 @@ const ConfirmOrder = (props) => {
               ...styles.SsConfirmButton,
               padding: HEIGHT * 0.018,
             }}
-            titleStyle={{color: 'black', fontWeight: 'bold'}}
+            titleStyle={{color: 'white', fontWeight: 'bold'}}
             loadingProps={{color: 'black'}}
             loading={loading}
             onPress={Confirm}
@@ -409,6 +371,8 @@ const styles = StyleSheet.create({
   },
   Input: {
     width: H_W.width * 0.81,
+    color: colors.primary,
+    fontWeight: 'bold',
   },
   SsInputIcon: {
     display: 'flex',

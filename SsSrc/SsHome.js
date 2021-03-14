@@ -21,14 +21,10 @@ import {
   SsremoveFavAction,
   SssetFavAction,
 } from '../SsRedux/SsActions';
-import Feather from 'react-native-vector-icons/Feather';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import MyHeader from '../SsComp/SsHeader';
-import {Button, Avatar, Badge} from 'react-native-elements';
+import {Avatar, Badge} from 'react-native-elements';
 import SsSearchBar from '../SsComp/SsSearchBar';
 import dp from '../SsPhotos/dp.jpg';
-import {color} from 'react-native-reanimated';
 
 function SsHome(props) {
   useEffect(() => {
@@ -39,8 +35,7 @@ function SsHome(props) {
   const [categories, setCategories] = useState(Data.category);
   const [currentCat, setCurrentCat] = useState(Data.category[0]);
   const [tabProducts, setTabProducts] = useState([]);
-  // const [mostPopular, setMostPopular] = useState([]);
-  // const [newArrival, setNewArrival] = useState([]);
+
   const changeTab = (tab) => {
     setCurrentCat(tab);
     const filteredProducts = Data.product.filter(
@@ -49,7 +44,7 @@ function SsHome(props) {
     setTabProducts(filteredProducts);
   };
 
-  // const SsGotoCart = () => RefNavigation.NavigateAndReset('SsCart');
+  const SsGotoCart = () => RefNavigation.Navigate('SsCart');
   const SsGotoSearch = () => RefNavigation.Navigate('SsSearch');
   const SsGoToSingleProduct = (item) => {
     props.SssetCurrentProductAction(item);
@@ -73,7 +68,7 @@ function SsHome(props) {
             style={{width: H_W.width * 0.65}}>
             <SsSearchBar editable={false} />
           </TouchableOpacity>
-          <TouchableOpacity style={{padding: 4}}>
+          <TouchableOpacity onPress={SsGotoCart} style={{padding: 4}}>
             <MaterialIcons
               name="shopping-bag"
               size={H_W.width * 0.1}
@@ -133,8 +128,6 @@ function SsHome(props) {
               <ProductList
                 item={item}
                 SsGoToSingleProduct={SsGoToSingleProduct}
-                // currentCat={currentCat}
-                // changeTab={changeTab}
               />
             )}
           />
@@ -162,6 +155,13 @@ export const ProductList = ({item, SsGoToSingleProduct}) => {
           position: 'relative',
           overflow: 'hidden',
           elevation: 5,
+          shadowColor: '#000',
+          shadowOffset: {
+            width: 0,
+            height: 2,
+          },
+          shadowOpacity: 0.25,
+          shadowRadius: 3.84,
         }}>
         <View
           style={{
@@ -182,8 +182,6 @@ export const ProductList = ({item, SsGoToSingleProduct}) => {
 };
 
 export const TabList = ({item, changeTab, currentCat}) => {
-  // const insets = useSafeAreaInsets();
-  // const HEIGHT = H_W.height - (insets.bottom + insets.top);
   return (
     <TouchableOpacity
       style={styles.HomeTabsWrapper}
@@ -248,7 +246,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     marginHorizontal: H_W.width * 0.05,
-    height: H_W.width * 0.1, //1%
+    height: H_W.width * 0.1,
     paddingHorizontal: H_W.width * 0.02,
     paddingTop: H_W.width * 0.02,
   },

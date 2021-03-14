@@ -1,21 +1,18 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
-import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import WrapperScreen from '../SsComp/WrapperScreen';
 import {H_W} from '../SsComp/SsDim';
 import NavigationRef from '../SsComp/RefNavigation';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import Data from '../SSData';
-import {HorizontalList} from './SsHome';
 import {connect} from 'react-redux';
 import {SssetCurrentProductAction} from '../SsRedux/SsActions';
-import UseHeader from '../SsComp/SsHeader';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import SsSearchBar from '../SsComp/SsSearchBar';
 import {colors} from '../SsComp/SsColor';
-import {Button, Avatar} from 'react-native-elements';
-import img from '../SsPhotos/s27.png';
+import {Avatar} from 'react-native-elements';
 
 function Search(props) {
   const [searchText, setSearchText] = useState('');
@@ -46,15 +43,12 @@ function Search(props) {
       <View
         key={index}
         style={{
-          ...border,
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
           marginTop: HEIGHT * 0.02,
         }}>
-        <TouchableOpacity
-          onPress={() => SsGoToSingleProduct(item)}
-          style={{...border}}>
+        <TouchableOpacity onPress={() => SsGoToSingleProduct(item)}>
           <Avatar
             rounded
             size={H_W.width * 0.6}
@@ -62,6 +56,13 @@ function Search(props) {
             containerStyle={{
               backgroundColor: colors.secondary,
               elevation: 24,
+              shadowColor: '#000',
+              shadowOffset: {
+                width: 0,
+                height: 12,
+              },
+              shadowOpacity: 0.58,
+              shadowRadius: 16.0,
               marginLeft: H_W.width * 0.04,
             }}
           />
@@ -86,6 +87,13 @@ function Search(props) {
           backgroundColor: colors.primary,
           paddingHorizontal: H_W.width * 0.04,
           elevation: 4,
+          shadowColor: '#000',
+          shadowOffset: {
+            width: 0,
+            height: 2,
+          },
+          shadowOpacity: 0.23,
+          shadowRadius: 2.62,
         }}>
         <View
           style={{
@@ -113,11 +121,6 @@ function Search(props) {
   );
 }
 
-const border = {
-  // borderWidth: 1,
-  // borderColor: 'red',
-};
-
 const mapStateToProps = (state) => ({
   SsFavs: state.SsToggleFav,
 });
@@ -125,18 +128,3 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   SssetCurrentProductAction,
 })(Search);
-
-const styles = StyleSheet.create({
-  TextShadow: {
-    textShadowColor: '#bcbcbc',
-    textShadowOffset: {width: 2, height: 2},
-    textShadowRadius: 2,
-  },
-  SearchBarWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginVertical: H_W.height * 0.003,
-  },
-  container: {flex: 1},
-});
