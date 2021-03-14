@@ -3,10 +3,12 @@ import {View, StyleSheet, TextInput} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {H_W} from './SsDim';
 import {colors} from './SsColor';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 export default function SearchBar({editable, changeSearchText}) {
   const [isFocused, setisFocused] = useState(false);
-
+  const insets = useSafeAreaInsets();
+  const HEIGHT = H_W.height - (insets.bottom + insets.top);
   const ChangeFocus = (bool) => {
     setisFocused(bool);
   };
@@ -14,12 +16,12 @@ export default function SearchBar({editable, changeSearchText}) {
   const onChangeText = (t) => changeSearchText(t);
 
   return (
-    <View style={styles.SB_Wrapper}>
+    <View style={{...styles.SB_Wrapper, height: HEIGHT * 0.06}}>
       <TextInput
         style={styles.SB_input}
-        placeholderTextColor={colors.lightGrey1}
+        placeholderTextColor={colors.lightGrey3}
         editable={editable}
-        placeholder="What would you like?"
+        placeholder="Search Candies here..."
         onBlur={() => ChangeFocus(false)}
         onFocus={() => ChangeFocus(true)}
         onChangeText={onChangeText}
@@ -28,7 +30,7 @@ export default function SearchBar({editable, changeSearchText}) {
         <FontAwesome
           name="search"
           size={18}
-          color={isFocused ? colors.primary : colors.lightGrey1}
+          color={isFocused ? colors.primary : colors.lightGrey3}
         />
       </View>
     </View>
@@ -43,15 +45,14 @@ const styles = StyleSheet.create({
     width: '10%',
   },
   SB_Wrapper: {
-    backgroundColor: colors.secondary,
+    backgroundColor: 'white',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 8,
-    borderRadius: 10,
-    width: H_W.width * 0.9,
+    // marginTop: 8,
+    borderRadius: 50,
+    width: '100%',
     paddingHorizontal: 10,
-    height: H_W.height * 0.07,
     elevation: 2,
     shadowColor: '#000',
     shadowOffset: {
@@ -65,5 +66,6 @@ const styles = StyleSheet.create({
     width: '90%',
     fontWeight: 'bold',
     fontSize: 15,
+    color: 'black',
   },
 });

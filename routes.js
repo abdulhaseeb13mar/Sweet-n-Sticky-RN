@@ -6,10 +6,10 @@ import {
 import {NavigationContainer} from '@react-navigation/native';
 import Navigator from './SsComp/RefNavigation';
 import SsHome from './SsSrc/SsHome';
-// import SsSP from './SsSrc/SsSP';
+import SsSP from './SsSrc/SsSP';
 // import SsCart from './SsSrc/SsCart';
 // import SsContact from './SsSrc/SsContact';
-// import SsSearch from './SsSrc/SsSearch';
+import SsSearch from './SsSrc/SsSearch';
 const Stack = createStackNavigator();
 
 function Routes(props) {
@@ -25,10 +25,10 @@ function Routes(props) {
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         }}>
         <Stack.Screen name="SsHome" component={SsHome} />
-        {/* <Stack.Screen name="SsSP" component={SsSP} />
-        <Stack.Screen name="SsCart" component={SsCart} />
+        <Stack.Screen name="SsSP" component={SsSP} />
+        {/* <Stack.Screen name="SsCart" component={SsCart} /> */}
         <Stack.Screen name="SsSearch" component={SsSearch} />
-        <Stack.Screen name="SsContact" component={SsContact} /> */}
+        {/* <Stack.Screen name="SsContact" component={SsContact} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

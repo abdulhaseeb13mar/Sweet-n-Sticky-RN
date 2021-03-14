@@ -44,6 +44,7 @@ export default {
       images: require('./SsPhotos/s1.png'),
       Description:
         'These aren’t the psychedelics you were warned to stay away from. True, they will open your mind and you will see flashes of color bouncing from a white surface. But that will be due to their sweet flavor-releasing endorphins and rainbow hues splattered against candy orbs, so no need to stay away.',
+      added: 0,
       Price: '1',
     },
     {
@@ -53,6 +54,7 @@ export default {
       images: require('./SsPhotos/s2.png'),
       Description:
         'Delicious layers of berry scrumptious flavour unwind, until you reach that yummy gum centre. ',
+      added: 0,
       Price: '1',
     },
     {
@@ -62,6 +64,7 @@ export default {
       images: require('./SsPhotos/s3.png'),
       Description:
         'These babies deliver on their promise of Crazy Sour Jawbreakers. You have been warned!',
+      added: 0,
       Price: '1',
     },
     {
@@ -71,6 +74,7 @@ export default {
       images: require('./SsPhotos/s4.png'),
       Description:
         'Delicious layers of Blackcurrant scrumptious flavour unwind, until you reach that yummy gum centre. ',
+      added: 0,
       Price: '1',
     },
     {
@@ -80,6 +84,7 @@ export default {
       images: require('./SsPhotos/s5.png'),
       Description:
         'Cola Lollipops are bigger than the average lollipop, but are still full of cola flavour!Cola flavour hard boiled lollipops.',
+      added: 0,
       Price: '1',
     },
     {
@@ -89,6 +94,7 @@ export default {
       images: require('./SsPhotos/s6.png'),
       Description:
         'Tasty Bubblegum Lollipops are bigger than the average lollipop, but are still full of bubblegum flavour! Bubblegum flavour hard boiled lollipops.',
+      added: 0,
       Price: '1',
     },
     {
@@ -98,6 +104,7 @@ export default {
       images: require('./SsPhotos/s7.png'),
       Description:
         'Delicious Sour Cherry Lollipops are bigger than the average lollipop, but are still full of cherry flavour! Sour Cherry flavour hard boiled lollipops, these will make an attractive display instore. Ready to sell straight from the jar each lollipop is individually wrapped.',
+      added: 0,
       Price: '1',
     },
     {
@@ -107,6 +114,7 @@ export default {
       images: require('./SsPhotos/s8.png'),
       Description:
         'Delicious Blueberry Lollipops are bigger than the average lollipop, but are still full of bubblegum flavour! Blueberry flavour hard boiled lollipops, these will make an attractive display in store. Ready to sell straight from the jar each lollipop is individually wrapped.',
+      added: 0,
       Price: '1',
     },
     {
@@ -116,6 +124,7 @@ export default {
       images: require('./SsPhotos/s9.png'),
       Description:
         'Candy Pop Lollipops are a traditional range of rock boiled lollipops. Delicious and mouth-watering, these lollipops are available in a wide range of flavours.',
+      added: 0,
       Price: '1',
     },
     {
@@ -125,6 +134,7 @@ export default {
       images: require('./SsPhotos/s10.png'),
       Description:
         'Candy Pop Lollipops are a traditional range of rock boiled lollipops. Delicious and mouth-watering, these lollipops are available in a wide range of flavours.',
+      added: 0,
       Price: '1',
     },
     {
@@ -134,6 +144,7 @@ export default {
       images: require('./SsPhotos/s11.png'),
       Description:
         'In electric blue, green, violet, pink, red, orange, and yellow, fill your bubblegum machine up to attract a slew of customers. Sure, they’ll be reluctant to give up their quarters at first. But the mouthwatering fruit flavors will make them give in and keep bringing their quarters back until your two pound refill bag is depleted. Don’t worry. We’ll always be here to keep the business going.',
+      added: 0,
       Price: '2',
     },
     {
@@ -143,6 +154,7 @@ export default {
       images: require('./SsPhotos/s12.png'),
       Description:
         'Discover the fun of tiny chiclets gum... square flecks of real Mexican chicles in a bright pink color. Grab a handful of the chewy tidbits and start chewing to meld them into one piece of yummy gum.',
+      added: 0,
       Price: '2',
     },
     {
@@ -152,17 +164,18 @@ export default {
       images: require('./SsPhotos/s13.png'),
       Description:
         'These darling gumball confections look like miniature versions of the real thing -- you’ll want to touch them to check whether they’re actually covered in felt! Spoiler alert: They aren’t. They’re chewy and delicious gumballs.',
+      added: 0,
       Price: '2',
     },
-    {
-      id: '14',
-      categoryId: '3',
-      productName: 'Basketballs Gumballs pack of 12',
-      images: require('./SsPhotos/s14.png'),
-      Description:
-        'Hosting an event for your basketball team? These amazing Bubblegum Basketballs are perfect for the candy bowl at your next special occasion or trophy presentation for your recreational basketball league, March Madness celebration, or NBA team party! Each plastic gumball is filled with sour powder sure to surprise and delight with every bite.',
-      Price: '2',
-    },
+    // {
+    //   id: '14',
+    //   categoryId: '3',
+    //   productName: 'Basketballs Gumballs pack of 12',
+    //   images: require('./SsPhotos/s14.png'),
+    //   Description:
+    //     'Hosting an event for your basketball team? These amazing Bubblegum Basketballs are perfect for the candy bowl at your next special occasion or trophy presentation for your recreational basketball league, March Madness celebration, or NBA team party! Each plastic gumball is filled with sour powder sure to surprise and delight with every bite.',
+    //   added: 0, Price: '2',
+    // },
     {
       id: '15',
       categoryId: '4',
@@ -170,6 +183,7 @@ export default {
       images: require('./SsPhotos/s15.png'),
       Description:
         'Bring a light airy sweetness to your snacking repretoir with these mini marshmallows. These puffy little treats are fun for kids / adults and make a great companion to a steaming mug of hot cocoa. Also, useful in numerous baking receipes. A great snacking option.',
+      added: 0,
       Price: '1.5',
     },
     {
@@ -179,6 +193,7 @@ export default {
       images: require('./SsPhotos/s16.png'),
       Description:
         'Enjoy the classic simplicity of our delicious and smooth 100% Vegetarian / Vegan Vanilla Mist marshmallows. Pure and sweet, perfect for roasting into coffee, hot chocolate or even right out of the box.',
+      added: 0,
       Price: '1.8',
     },
     {
@@ -188,6 +203,7 @@ export default {
       images: require('./SsPhotos/s17.png'),
       Description:
         'Marshmallow is a type of confectionery that is typically made from sugar, water and gelatin whipped to a squishy consistency. It is used as a filling in baking, or commonly molded into shapes and coated with corn starch/sugar.It can be eaten directly or can also be toasted a bit to get caramelly taste',
+      added: 0,
       Price: '2',
     },
     {
@@ -197,6 +213,7 @@ export default {
       images: require('./SsPhotos/s18.png'),
       Description:
         'Amazing fluffly fruit flavoured marshmallow. That melts in your mouth. Natural flavoured marshmallow delicious soft and fluffy . This is 100% vegetarian.',
+      added: 0,
       Price: '1.7',
     },
     {
@@ -206,6 +223,7 @@ export default {
       images: require('./SsPhotos/s19.png'),
       Description:
         'Vanilla flavoured Marshmallow twists. These delicious, colourful marshmallows are perfect for any event. Small enough to chew on, they’re also perfect with hot chocolate, for children’s pick',
+      added: 0,
       Price: '1.8',
     },
     {
@@ -215,6 +233,7 @@ export default {
       images: require('./SsPhotos/s20.png'),
       Description:
         'Luscious caramel blends with milk chocolate ganache center; dipped in dark chocolate, then drizzled with milk chocolate and sprinkled with sea salt.',
+      added: 0,
       Price: '5',
     },
     {
@@ -224,6 +243,7 @@ export default {
       images: require('./SsPhotos/s21.png'),
       Description:
         'Creamy-sweet coconut center, dipped in smooth milk chocolate, then in dark chocolate.',
+      added: 0,
       Price: '6',
     },
     {
@@ -233,6 +253,7 @@ export default {
       images: require('./SsPhotos/s22.png'),
       Description:
         'Dark chocolate center with amaretto liqueur flavor, dipped in milk chocolate, then in white chocolate.',
+      added: 0,
       Price: '6',
     },
     {
@@ -242,6 +263,7 @@ export default {
       images: require('./SsPhotos/s23.png'),
       Description:
         'Creamy peanut butter center; dipped in dark chocolate, then in milk chocolate.',
+      added: 0,
       Price: '6',
     },
     {
@@ -251,6 +273,7 @@ export default {
       images: require('./SsPhotos/s24.png'),
       Description:
         'A rich, smooth peanut butter center is hand-dipped in white chocolate and packed full of salty pretzel pieces.',
+      added: 0,
       Price: '7',
     },
     {
@@ -260,6 +283,7 @@ export default {
       images: require('./SsPhotos/s25.png'),
       Description:
         'Peanut butter center coated with milk and dark chocolate, hand piped, and topped with crushed peanuts.',
+      added: 0,
       Price: '7',
     },
     {
@@ -269,6 +293,7 @@ export default {
       images: require('./SsPhotos/s26.png'),
       Description:
         'This soft and molassesy Australian treat uses authentic licorice root extract to achieve a deep flavor that will take you back to yesteryear.',
+      added: 0,
       Price: '7',
     },
     {
@@ -278,6 +303,7 @@ export default {
       images: require('./SsPhotos/s27.png'),
       Description:
         'An assortment of delicious Jelly Fruit Slices in a variety of flavors – Cherry, Orange, Lemon, Lime, Grapefruit, Raspberry, Watermelon, & Grape.',
+      added: 0,
       Price: '1',
     },
     {
@@ -286,6 +312,7 @@ export default {
       productName: 'Mini Gum Balls 1/4lb',
       images: require('./SsPhotos/s28.png'),
       Description: 'Multi-colored Mini Gum Balls in bag.',
+      added: 0,
       Price: '1',
     },
     {
@@ -295,6 +322,7 @@ export default {
       images: require('./SsPhotos/s29.png'),
       Description:
         'Lollipop pressed into the shape of Philadelphia’s most iconic attraction, the Liberty Bell! You will be sent either Red, White, or Blue depending on availability.',
+      added: 0,
       Price: '2',
     },
     {
@@ -304,6 +332,7 @@ export default {
       images: require('./SsPhotos/s30.png'),
       Description:
         'Bubblegum flavoured buttercream filling,this delicious experience will be completely fulfilling!',
+      added: 0,
       Price: '5',
     },
     {
@@ -313,6 +342,7 @@ export default {
       images: require('./SsPhotos/s31.png'),
       Description:
         'Hey there dessert lover , Well if you don’t try this your insane.Because cookies and cream is the best combination.',
+      added: 0,
       Price: '5',
     },
     {
@@ -322,6 +352,7 @@ export default {
       images: require('./SsPhotos/s32.png'),
       Description:
         'The macaron filled with Nutella and biscuit shell has the colour of a blue sky,this is so yummy, you need this.',
+      added: 0,
       Price: '5',
     },
     {
@@ -331,6 +362,7 @@ export default {
       images: require('./SsPhotos/s33.png'),
       Description:
         'Savoury and sweet,filled with peanut butter flavoured buttercream.',
+      added: 0,
       Price: '5',
     },
     {
@@ -340,6 +372,7 @@ export default {
       images: require('./SsPhotos/s34.png'),
       Description:
         "Perfect at any party no matter the theme,because who doesn't like strawberry & cream?Perfect macaron for you and your friends will love.",
+      added: 0,
       Price: '5',
     },
   ],

@@ -23,38 +23,98 @@ import {
 } from '../SsRedux/SsActions';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MyHeader from '../SsComp/SsHeader';
-import {Button} from 'react-native-elements';
+import {Button, Avatar, Badge} from 'react-native-elements';
+import SsSearchBar from '../SsComp/SsSearchBar';
+import dp from '../SsPhotos/dp.jpg';
+import {color} from 'react-native-reanimated';
 
 function SsHome(props) {
   useEffect(() => {
-    changeTab(Data.catagory[0]);
+    changeTab(Data.category[0]);
   }, []);
   const insets = useSafeAreaInsets();
   const HEIGHT = H_W.height - (insets.bottom + insets.top);
-  const [categories, setCategories] = useState(Data.catagory);
-  const [currentCat, setCurrentCat] = useState(Data.catagory[0]);
+  const [categories, setCategories] = useState(Data.category);
+  const [currentCat, setCurrentCat] = useState(Data.category[0]);
   const [tabProducts, setTabProducts] = useState([]);
   // const [mostPopular, setMostPopular] = useState([]);
   // const [newArrival, setNewArrival] = useState([]);
   const changeTab = (tab) => {
     setCurrentCat(tab);
-    const filteredProducts = Data.products.filter(
-      (item) => item.catagoryId === tab.id,
+    const filteredProducts = Data.product.filter(
+      (item) => item.categoryId === tab.id,
     );
     setTabProducts(filteredProducts);
   };
 
   // const SsGotoCart = () => RefNavigation.NavigateAndReset('SsCart');
-  // const SsGotoSearch = () => RefNavigation.Navigate('SsSearch');
-  // const SsGoToSingleProduct = (item) => {
-  //   props.SssetCurrentProductAction(item);
-  //   RefNavigation.NavigateAndReset('SsSP');
-  // };
+  const SsGotoSearch = () => RefNavigation.Navigate('SsSearch');
+  const SsGoToSingleProduct = (item) => {
+    props.SssetCurrentProductAction(item);
+    RefNavigation.Navigate('SsSP');
+  };
   return (
-    <WrapperScreen style={{backgroundColor: 'white'}}>
+    <WrapperScreen
+      style={{backgroundColor: `rgba(${colors.rgb_Primary}, 0.15)`}}>
       <ScrollView>
-        <View>
+        <View
+          style={{
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginTop: HEIGHT * 0.02,
+            marginBottom: HEIGHT * 0.05,
+            paddingHorizontal: H_W.width * 0.05,
+            flexDirection: 'row',
+          }}>
+          <TouchableOpacity
+            onPress={SsGotoSearch}
+            style={{width: H_W.width * 0.65}}>
+            <SsSearchBar editable={false} />
+          </TouchableOpacity>
+          <TouchableOpacity style={{padding: 4}}>
+            <MaterialIcons
+              name="shopping-bag"
+              size={H_W.width * 0.1}
+              color={colors.primary}
+            />
+            {props.SstotalItems > 0 && (
+              <Badge
+                value={props.SstotalItems}
+                containerStyle={styles.badgeContainer}
+                badgeStyle={{
+                  backgroundColor: colors.secondary,
+                }}
+              />
+            )}
+          </TouchableOpacity>
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            paddingHorizontal: H_W.width * 0.07,
+            marginBottom: HEIGHT * 0.03,
+          }}>
+          <View>
+            <Text
+              style={{fontWeight: 'bold', color: colors.primary, fontSize: 23}}>
+              Victoria Topsy
+            </Text>
+            <Text
+              style={{
+                color: colors.primary,
+                fontSize: 14,
+                marginTop: HEIGHT * 0.005,
+              }}>
+              Away Last 15 min
+            </Text>
+          </View>
+          <Avatar rounded size={H_W.width * 0.15} source={dp} />
+        </View>
+        <View style={{marginBottom: HEIGHT * 0.03}}>
           <Loop
             data={categories}
             renderItem={({item}) => (
@@ -66,42 +126,17 @@ function SsHome(props) {
             )}
           />
         </View>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <View
-            style={{
-              height: H_W.width * 0.6,
-              width: H_W.width * 0.16,
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'flex-start',
-              borderTopRightRadius: 15,
-              borderBottomRightRadius: 15,
-              backgroundColor: colors.primary,
-            }}>
-            <View
-              style={{
-                transform: [{rotate: '270deg'}],
-                alignSelf: 'stretch',
-                width: H_W.width * 0.52,
-                // height: HEIGHT * 0.25,
-              }}>
-              <Text
-                style={{
-                  fontSize: 24,
-                  fontWeight: 'bold',
-                  height: H_W.width * 0.2,
-                  textAlign: 'center',
-                  textAlignVertical: 'center',
-                  color: 'white',
-                  // width: H_W.width * 0.25,
-                }}>
-                {currentCat.CatagoryName}
-              </Text>
-            </View>
-          </View>
+        <View style={{}}>
           <Loop
             data={tabProducts}
-            renderItem={({item}) => <ProductList item={item} />}
+            renderItem={({item}) => (
+              <ProductList
+                item={item}
+                SsGoToSingleProduct={SsGoToSingleProduct}
+                // currentCat={currentCat}
+                // changeTab={changeTab}
+              />
+            )}
           />
         </View>
       </ScrollView>
@@ -109,148 +144,119 @@ function SsHome(props) {
   );
 }
 
-export const ProductList = ({item}) => {
+export const ProductList = ({item, SsGoToSingleProduct}) => {
   const insets = useSafeAreaInsets();
   const HEIGHT = H_W.height - (insets.bottom + insets.top);
   return (
-    <TouchableOpacity
-      style={{
-        backgroundColor: 'white',
-        elevation: 5,
-        borderRadius: 20,
-        marginHorizontal: H_W.width * 0.03,
-      }}>
-      <View
+    <TouchableOpacity onPress={() => SsGoToSingleProduct(item)}>
+      <ImageBackground
+        source={item.images}
+        resizeMode="contain"
+        imageStyle={{borderRadius: 30}}
         style={{
-          flex: 1,
-          width: H_W.width * 0.6,
-          backgroundColor: 'white',
-          padding: H_W.width * 0.03,
-          alignItems: 'center',
-          borderRadius: 20,
-          justifyContent: 'flex-start',
+          width: H_W.width * 0.7,
+          height: HEIGHT * 0.6,
+          backgroundColor: colors.secondary,
+          borderRadius: 30,
+          marginHorizontal: H_W.width * 0.05,
+          position: 'relative',
+          overflow: 'hidden',
+          elevation: 5,
         }}>
-        <ImageBackground
-          source={item.images}
-          style={{width: '100%', height: HEIGHT * 0.3}}
-          resizeMode="contain"
-        />
-        <Text
-          style={{
-            fontWeight: 'bold',
-            fontSize: 22,
-            color: colors.primary,
-            alignSelf: 'flex-start',
-          }}>
-          {item.productName}
-        </Text>
         <View
           style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            width: '100%',
-            justifyContent: 'space-between',
-            marginTop: HEIGHT * 0.002,
-          }}>
-          <Text
-            style={{
-              fontSize: 15,
-              color: colors.lightGrey3,
-              fontWeight: 'bold',
-            }}>
-            {item.catagoryName}
-          </Text>
-          <Text
-            style={{
-              fontSize: 15,
-              color: colors.lightGrey3,
-              fontWeight: 'bold',
-            }}>
-            {item.price}
-          </Text>
-        </View>
-      </View>
+            width: 80,
+            height: 80,
+            backgroundColor: 'white',
+            borderRadius: 50,
+            opacity: 0.2,
+            transform: [{scaleX: 4.5}, {scaleY: 4}],
+            position: 'absolute',
+            top: 0,
+            zIndex: -1,
+          }}
+        />
+      </ImageBackground>
     </TouchableOpacity>
   );
 };
 
 export const TabList = ({item, changeTab, currentCat}) => {
-  const insets = useSafeAreaInsets();
-  const HEIGHT = H_W.height - (insets.bottom + insets.top);
+  // const insets = useSafeAreaInsets();
+  // const HEIGHT = H_W.height - (insets.bottom + insets.top);
   return (
     <TouchableOpacity
-      style={{
-        backgroundColor: 'white',
-        elevation: 3,
-        borderRadius: 20,
-        marginHorizontal: H_W.width * 0.03,
-      }}
+      style={styles.HomeTabsWrapper}
       onPress={() => changeTab(item)}>
-      <View
+      <Text
         style={{
-          width: H_W.width * 0.3,
-          backgroundColor:
-            item.CatagoryName === currentCat.CatagoryName
-              ? `rgba(${colors.rgb_Primary},0.7)`
-              : 'white',
-          height: HEIGHT * 0.2,
-          padding: H_W.width * 0.03,
-          alignItems: 'center',
-          borderRadius: 20,
-          justifyContent: 'space-between',
+          ...styles.HomeTabsText,
+          color:
+            item.categoryName === currentCat.categoryName
+              ? colors.primary
+              : `rgba(${colors.rgb_Primary}, 0.5)`,
         }}>
-        <ImageBackground
-          source={
-            item.CatagoryName === currentCat.CatagoryName
-              ? item.iconw
-              : item.icon
-          }
-          style={{width: '100%', height: HEIGHT * 0.1}}
-          resizeMode="contain"
-        />
-        <Text
-          style={{
-            fontWeight: 'bold',
-            fontSize: 19,
-            color:
-              item.CatagoryName === currentCat.CatagoryName
-                ? 'white'
-                : colors.primary,
-          }}>
-          {item.CatagoryName}
-        </Text>
-      </View>
+        {item.categoryName}
+      </Text>
+      {item.categoryName === currentCat.categoryName ? (
+        <View style={styles.tabIndicator} />
+      ) : null}
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
-  SsHome_CE21: {},
-  SsHome_CE20: {},
-  SsHome_CE19: {},
-  SsHome_CE18: {},
-  SsHome_CE17: {},
-  SsHome_CE16: {},
-  SsHome_CE15: {},
-  SsHome_CE14: {},
-  SsHome_CE13: {},
-  SsHome_CE12: {},
-  SsHome_CE11: {},
-  SsHome_CE10: {},
-  SsHome_CE9: {},
-  SsHome_CE8: {},
-  SsHome_CE7: {},
-  SsHome_CE6: {},
-  SsHome_CE5: {},
-  SsHome_CE4: {},
-  SsHome_CE3: {},
-  SsHome_CE2: {},
-  SsHome_CE1: {},
+  SsHome21: {},
+  SsHome20: {},
+  SsHome19: {},
+  SsHome18: {},
+  SsHome17: {},
+  SsHome16: {},
+  SsHome15: {},
+  SsHome14: {},
+  SsHome13: {},
+  SsHome12: {},
+  SsHome11: {},
+  SsHome10: {},
+  SsHome9: {},
+  SsHome8: {},
+  SsHome7: {},
+  SsHome6: {},
+  SsHome5: {},
+  SsHome4: {},
+  SsHome3: {},
+  SsHome2: {},
+  SsHome1: {},
+  badgeContainer: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+  },
+  tabIndicator: {
+    width: '100%',
+    borderWidth: 1.8,
+    borderRadius: 10,
+    marginTop: 4,
+    backgroundColor: colors.primary,
+  },
+  HomeTabsText: {
+    fontSize: 16,
+    fontWeight: '700',
+  },
+  HomeTabsWrapper: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    marginHorizontal: H_W.width * 0.05,
+    height: H_W.width * 0.1, //1%
+    paddingHorizontal: H_W.width * 0.02,
+    paddingTop: H_W.width * 0.02,
+  },
 });
 
 const mapStateToProps = (state) => {
   return {
-    SsTotal: state.SsCartReducer.totalAmount,
+    SstotalItems: state.SsCartReducer.totalItems,
   };
 };
 
