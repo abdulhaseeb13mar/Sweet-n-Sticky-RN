@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React,  from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -75,7 +75,7 @@ function SingleProduct(props) {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={SsGotoSearch}
-            style={{width: '85%', marginLeft: H_W.width * 0.05}}>
+            style={{width: '85%', marginLeft: H_W.width * 0.05, zIndex: 5}}>
             <SsSearchBar editable={false} />
           </TouchableOpacity>
         </View>

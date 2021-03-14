@@ -23,7 +23,6 @@ function SsConfirmOrder(props) {
       <View
         style={{
           flex: 1,
-          borderWidth: 1,
           alignItems: 'center',
           justifyContent: 'center',
         }}>
@@ -41,7 +40,7 @@ function SsConfirmOrder(props) {
             width: H_W.width * 0.9,
             marginTop: 15,
           }}>
-          WE HAVE RECEIEVED YOUR ORDER
+          WE HAVE RECEIVED YOUR ORDER
         </Text>
         <Button
           onPress={ResetAndGoHome}
@@ -49,6 +48,7 @@ function SsConfirmOrder(props) {
           buttonStyle={{
             backgroundColor: colors.secondary,
             width: H_W.width * 0.6,
+            borderRadius: 10
           }}
           raised
           titleStyle={{fontSize: 20, fontWeight: 'bold', borderRadius: 10}}
