@@ -1,11 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {H_W} from '../SsComp/SsDim';
 import WrapperScreen from '../SsComp/WrapperScreen';
 import {connect} from 'react-redux';
@@ -24,7 +19,6 @@ import {
 } from '../SsRedux/SsActions';
 
 function SingleProduct(props) {
- 
   const insets = useSafeAreaInsets();
   const HEIGHT = H_W.height - (insets.bottom + insets.top);
   const SsProduct = props.SsProduct;
@@ -83,9 +77,6 @@ function SingleProduct(props) {
           <View>
             <Avatar
               rounded
-
-
-              
               size={H_W.width * 0.75}
               source={SsProduct.images}
               containerStyle={{
