@@ -83,6 +83,9 @@ function SingleProduct(props) {
           <View>
             <Avatar
               rounded
+
+
+              
               size={H_W.width * 0.75}
               source={SsProduct.images}
               containerStyle={{
