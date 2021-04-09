@@ -37,7 +37,11 @@ const ConfirmOrder = (props) => {
     if (!formValidResponse.status) {
       errorMsgHandler(formValidResponse.errCategory, formValidResponse.errMsg);
     } else {
-      CallApi();
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+        NavPointer.Push('SsConfirmOrder');
+      }, 2000);
       props.SsUserAction({
         email: email,
         firstName: firstName,
